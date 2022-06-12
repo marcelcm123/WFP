@@ -1,6 +1,23 @@
+@section('javascript')
+<script>
+function showInfo()
+{
+  $.ajax({
+    type:'POST',
+    url:'{{route("medicine.showInfo")}}',
+    data:'_token=<?php echo csrf_token() ?>',
+    success: function(data){
+       $('#showinfo').html(data.msg)
+    }
+  });
+}
+</script>
+@endsection
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+       
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,16 +95,18 @@
                     @endauth
                 </div>
             @endif
-
+            <img src="{{ asset('img/store.png') }}"/>
             <div class="content">
                 <div class="title m-b-md">
-                    
-                    Hello, {{$name}}.
+                    Medical Store
+                   
                 </div>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Medicines</a>
                     <a href="https://laracasts.com">Medical Equipment</a>
+
+
                 </div>
             </div>
         </div>
